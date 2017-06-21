@@ -1,8 +1,9 @@
 package controllers
 
 import javax.inject._
-import play.api._
+
 import play.api.mvc._
+
 
 /**
  * This controller creates an `Action` to handle HTTP requests to the
@@ -21,4 +22,12 @@ class HomeController @Inject() extends Controller {
     Ok(views.html.index("Your new application is ready.")("warning"))
   }
 
+  // def rate = Action { implicit request =>
+  //   val rate = Json.reads[RateRequest]
+  //   Ok(Json.toJson(rate))
+  // }
+
 }
+
+
+// case class RateRequest(c: Int, h: Int, p: Int)

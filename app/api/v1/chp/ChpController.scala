@@ -1,6 +1,7 @@
 package api.v1.chp
 
 import javax.inject.Inject
+import play.api.Logger
 import play.api.data.Form
 import play.api.i18n.{ I18nSupport, MessagesApi }
 import play.api.mvc._
@@ -38,7 +39,7 @@ class ChpController @Inject()(val messagesApi: MessagesApi) (implicit ec: Execut
 
   def rate: Action[AnyContent] = Action.async {
     implicit request =>
-
+    Logger.debug("blahfeoijafioejoifjaeojabcdefg")
     processJsonPost()
   }
 
@@ -61,11 +62,8 @@ class ChpController @Inject()(val messagesApi: MessagesApi) (implicit ec: Execut
       // handler.create(input).map { post =>
       //   Created(Json.toJson(post)).withHeaders(LOCATION -> post.link)
       // }
-      println("success!")
-      println(input)
       Future.successful(Ok("success!"))
     }
-
     form.bindFromRequest().fold(failure, success)
   }
 }

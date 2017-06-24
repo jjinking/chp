@@ -1,5 +1,5 @@
 
-const API_URL = "localhost:9000/api/v1/chp/"
+const API_URL = "http://localhost:9000/api/v1/chp/"
 
 
 /**
@@ -33,6 +33,9 @@ function buildRequest() {
     * On user submit
     */
 function onSubmit(evt) {
+    var requestObj = JSON.stringify(buildRequest());
+    console.log(requestObj);
+    
     $.ajax({
         headers: {
             'Accept': 'application/json',
@@ -40,7 +43,7 @@ function onSubmit(evt) {
         },
         'type': 'POST',
         'url': API_URL,
-        'data': buildRequest(),
+        'data': requestObj,
         'dataType': 'json',
         'success': function(returnData) {
             try {
@@ -51,11 +54,12 @@ function onSubmit(evt) {
             }
         },
         'error': function(xhr, status, error) {
-            message(JSON.parse(xhr.responseText).message, "warning");
             console.log(xhr);
+            //message(JSON.parse(xhr.responseText).message, "warning");
+            message(xhr.responseText, "success");
         }
     }).done(function() {
-        message("forecast success", "success");
+        message("request successful", "success");
     }).fail(function() {
         //message("Error - check console", "warning");
     }).complete(function() {

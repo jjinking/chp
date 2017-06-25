@@ -103,14 +103,14 @@ function updateChpsView(chps) {
         sumH += Number(chpObj.h);
         sumP += Number(chpObj.p);
     });
-    $("#avg-c").text(parseFloat(sumC / chps.length).toFixed(2));
-    $("#avg-h").text(parseFloat(sumH / chps.length).toFixed(2));
-    $("#avg-p").text(parseFloat(sumP / chps.length).toFixed(2));
+    $("#avg-c").text(parseFloat(sumC / Math.max(chps.length, 1)).toFixed(2));
+    $("#avg-h").text(parseFloat(sumH / Math.max(chps.length, 1)).toFixed(2));
+    $("#avg-p").text(parseFloat(sumP / Math.max(chps.length, 1)).toFixed(2));
 }
 
 /**
-    * Register listeners on document ready
-    */
+ * Register listeners on document ready
+ */
 $(document).ready(function() {
     // Register action for submit button
     $("#submit-button").click(onSubmit);

@@ -1,5 +1,5 @@
 
-const API_URL = "http://localhost:9000/api/v1/chp/"
+const API_URL = "/api/v1/chp/"
 
 
 /**
@@ -54,7 +54,7 @@ function onSubmit(evt) {
         'error': function(xhr, status, error) {
             console.log(xhr);
             //message(JSON.parse(xhr.responseText).message, "warning");
-            message(xhr.responseText, "success");
+            message(xhr.responseText, "error");
         }
     }).done(function() {
         message("request successful", "success");
@@ -82,10 +82,10 @@ function refresh() {
         'error': function(xhr, status, error) {
             console.log(xhr);
             //message(JSON.parse(xhr.responseText).message, "warning");
-            message(xhr.responseText, "success");
+            message(xhr.responseText, "error");
         }
     }).done(function() {
-        message("request successful", "success");
+        //message("request successful", "success");
     }).fail(function() {
         //message("Error - check console", "warning");
     }).complete(function() {

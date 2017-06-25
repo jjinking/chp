@@ -10,7 +10,12 @@
  * argument is an `Html` object containing the body of the page.
  *@
 @main(title="Retro") {
-    <div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="identifier">Identifier</label>
+            <input type="text" class="form-control" id="ident" aria-describedby="identifier-help">
+            <small id="identifier" class="form-text text-muted">Unique identifier to show show submitted</small>
+         </div>
         <div class="form-group">
             <label for="rate-c">Communication</label><br />
             <label class="radio-inline">
@@ -66,5 +71,16 @@
             </label>
         </div>
       <button id="submit-button" type="submit" class="btn btn-default">Submit</button>
+    </div>
+    <div class="col-md-6">
+        <ul id="chps-submitted" class="list-group">
+        </ul>
+
+        <div class="well">
+            <h3>Average</h3>
+            <span>C: </span><span id="avg-c"></span>
+            <span>H: </span><span id="avg-h"></span>
+            <span>P: </span><span id="avg-p"></span>
+        </div>
     </div>
 }(message)(alertType)

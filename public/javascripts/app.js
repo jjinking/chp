@@ -23,11 +23,13 @@ function message(mssg, mssgType) {
     */
 function buildRequest() {
     // Grab data from textarea
+    var ident = $("#ident").val();
     var c = Number($("input[name='rate-c']:checked").val());
     var h = Number($("input[name='rate-h']:checked").val());
     var p = Number($("input[name='rate-p']:checked").val());
-    return {'c': c, 'h': h, 'p': p};
+    return {'ident': ident, 'c': c, 'h': h, 'p': p};
 }
+
 
 /**
     * On user submit
@@ -46,12 +48,8 @@ function onSubmit(evt) {
         'data': requestObj,
         'dataType': 'json',
         'success': function(returnData) {
-            try {
-                console.log(returnData)
-            } catch (e) {
-                console.log(e);
-                console.log(returnData);
-            }
+            console.log(returnData);
+            updateChpsView(returnData);
         },
         'error': function(xhr, status, error) {
             console.log(xhr);
@@ -67,6 +65,48 @@ function onSubmit(evt) {
     });
 }
 
+function refresh() {
+    $.ajax({
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        'type': 'GET',
+        'url': API_URL,
+//        'data': requestObj,
+        'dataType': 'json',
+        'success': function(returnData) {
+            console.log(returnData);
+            updateChpsView(returnData);
+        },
+        'error': function(xhr, status, error) {
+            console.log(xhr);
+            //message(JSON.parse(xhr.responseText).message, "warning");
+            message(xhr.responseText, "success");
+        }
+    }).done(function() {
+        message("request successful", "success");
+    }).fail(function() {
+        //message("Error - check console", "warning");
+    }).complete(function() {
+        // maybe update view
+    });
+}
+
+function updateChpsView(chps) {
+    $("#chps-submitted").empty();
+    var sumC = 0; sumH = 0; sumP = 0;
+    chps.map((chpObj) => {
+        var rowVal = "C: " + chpObj.c + " H: " + chpObj.h + " P: " + chpObj.p + " " + chpObj.ident;
+        $("#chps-submitted").append("<li class='list-group-item'>" + rowVal +"</li>");
+        sumC += Number(chpObj.c);
+        sumH += Number(chpObj.h);
+        sumP += Number(chpObj.p);
+    });
+    $("#avg-c").text(parseFloat(sumC / chps.length).toFixed(2));
+    $("#avg-h").text(parseFloat(sumH / chps.length).toFixed(2));
+    $("#avg-p").text(parseFloat(sumP / chps.length).toFixed(2));
+}
 
 /**
     * Register listeners on document ready
@@ -74,4 +114,5 @@ function onSubmit(evt) {
 $(document).ready(function() {
     // Register action for submit button
     $("#submit-button").click(onSubmit);
+    refresh();
 });

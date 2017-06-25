@@ -15,6 +15,7 @@ function message(mssg, mssgType) {
     // Add new class
     $(".alert").addClass("alert-" + mssgType);
     $(".alert").text(mssg);
+    $(".alert").show();
 
 }
 
@@ -112,6 +113,8 @@ function updateChpsView(chps) {
  * Register listeners on document ready
  */
 $(document).ready(function() {
+    $(".alert").hide();
+
     // Register action for submit button
     $("#submit-button").click(onSubmit);
     refresh();

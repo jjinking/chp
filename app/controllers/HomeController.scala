@@ -19,7 +19,7 @@ class HomeController @Inject() extends Controller {
    * a path of `/`.
    */
   def index = Action {
-    Ok(views.html.index("Your new application is ready.")("warning"))
+    Ok(views.html.index())
   }
 
   // def rate = Action { implicit request =>

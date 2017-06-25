@@ -4,7 +4,7 @@
  * two arguments, a `String` for the title of the page and an `Html`
  * object to insert into the body of the page.
  *@
-@(title: String)(content: Html)(alert: String)(alertType: String)
+@(title: String)(content: Html)
 
 
 <!DOCTYPE html>
@@ -33,7 +33,7 @@
   </head>
   <body>
       <div class="container">
-          <div class="alert alert-success alert-@alertType" role="alert">@alert</div>
+          <div class="alert" role="alert"></div>
           <h1>@title</h1>
           @content
       </div>
